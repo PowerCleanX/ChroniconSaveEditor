@@ -153,7 +153,7 @@ Likely contribution areas:
 
 If this tool saves you time and you want to support development, you can buy me a coffee here:
 
-**Buy Me a Coffee:** [Add your link here](https://example.com)
+**Buy Me a Coffee:** [Link](https://buymeacoffee.com/powerclean)
 
 ## License
 
