@@ -2,7 +2,7 @@
 
 [![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=powerclean&button_colour=FFDD00&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff)](https://buymeacoffee.com/powerclean)
 
-Unofficial fan-made desktop save editor for Chronicon.
+Unofficial fan-made desktop save editor for Chronicon. - https://www.gog.com/en/game/chronicon_complete
 
 Chronicon Save Editor is an open-source desktop app for inspecting and editing Chronicon save files with a focus on safe, minimal patching instead of blindly rewriting whole files.
 
