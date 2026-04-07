@@ -1,0 +1,193 @@
+{
+  "sections": {
+    "a": {
+      "label": "Section A",
+      "description": "Observed hex payload section. Meaning not mapped yet.",
+      "confidence": "unknown"
+    },
+    "b": {
+      "label": "Item Container Candidates",
+      "description": "Observed to contain item-like records with fields such as name, level, enchant values, and socket data.",
+      "confidence": "low"
+    },
+    "c": {
+      "label": "Section C",
+      "description": "Observed hex payload section. Meaning not mapped yet.",
+      "confidence": "unknown"
+    },
+    "e": {
+      "label": "Equipment Candidates",
+      "description": "Observed to contain item-like records with names and numeric fields. Likely equipped or active gear data.",
+      "confidence": "low"
+    },
+    "e1art": {
+      "label": "Section e1art",
+      "description": "Short hex payload section. Meaning not mapped yet.",
+      "confidence": "unknown"
+    },
+    "e1inv": {
+      "label": "Section e1inv",
+      "description": "Observed hex payload section. Meaning not mapped yet.",
+      "confidence": "unknown"
+    },
+    "e1n": {
+      "label": "Section e1n",
+      "description": "Short hex payload section. Meaning not mapped yet.",
+      "confidence": "unknown"
+    },
+    "i": {
+      "label": "Inventory Candidates",
+      "description": "Observed to contain 50 variable-length inventory slot records with inline item payloads. Empty slots are currently zero-length records.",
+      "confidence": "low"
+    },
+    "ms": {
+      "label": "Section ms",
+      "description": "Observed hex payload section. Meaning not mapped yet.",
+      "confidence": "unknown"
+    },
+    "q": {
+      "label": "Quest Candidates",
+      "description": "Observed hex payload section. Meaning not mapped yet.",
+      "confidence": "low"
+    },
+    "r": {
+      "label": "Section r",
+      "description": "Short hex payload section. Meaning not mapped yet.",
+      "confidence": "unknown"
+    },
+    "s": {
+      "label": "Storage Candidates",
+      "description": "Observed to contain item-like records with names and numeric fields. Could represent stash or secondary storage.",
+      "confidence": "low"
+    },
+    "sd": {
+      "label": "Section sd",
+      "description": "Observed hex payload section. Meaning not mapped yet.",
+      "confidence": "unknown"
+    },
+    "sk": {
+      "label": "Skill Candidates",
+      "description": "Observed large hex payload section. Likely skill-related, but still unconfirmed.",
+      "confidence": "low"
+    },
+    "ss": {
+      "label": "Section ss",
+      "description": "Short hex payload section. Meaning not mapped yet.",
+      "confidence": "unknown"
+    },
+    "st": {
+      "label": "Stats Candidates",
+      "description": "Observed hex payload section. Likely stat or state data, but still unconfirmed.",
+      "confidence": "low"
+    },
+    "wp": {
+      "label": "Waypoint Candidates",
+      "description": "Observed hex payload section. Meaning not mapped yet.",
+      "confidence": "low"
+    }
+  },
+  "fields": {
+    "character.level": {
+      "status": "confirmed",
+      "description": "Section 'c' byte offset 24 stores the character level as a little-endian float64."
+    },
+    "character.free_skill_points": {
+      "status": "confirmed",
+      "description": "Section 'c' byte offset 48 stores free skill points as a little-endian float64."
+    },
+    "character.free_mastery_points": {
+      "status": "confirmed",
+      "description": "Section 'c' byte offset 204 stores free mastery points as a little-endian float64."
+    },
+    "character.gold": {
+      "status": "planned",
+      "description": "Placeholder for future currency detection."
+    },
+    "character.crystals": {
+      "status": "planned",
+      "description": "Placeholder for future currency detection."
+    }
+  },
+  "affixes": {
+    "dmg": {
+      "label": "Damage",
+      "editable": true,
+      "decimals": 2
+    },
+    "hp": {
+      "label": "Health",
+      "editable": true,
+      "decimals": 2
+    },
+    "mp": {
+      "label": "Mana",
+      "editable": true,
+      "decimals": 2
+    },
+    "crit": {
+      "label": "Crit",
+      "editable": true,
+      "decimals": 4
+    },
+    "attackspeed": {
+      "label": "Attack Speed",
+      "editable": true,
+      "decimals": 4
+    },
+    "score": {
+      "label": "Score",
+      "editable": true,
+      "decimals": 2
+    },
+    "enchant_value0": {
+      "label": "Enchant Value 0",
+      "editable": true,
+      "decimals": 2
+    },
+    "enchant_value1": {
+      "label": "Enchant Value 1",
+      "editable": true,
+      "decimals": 2
+    },
+    "enchant_value2": {
+      "label": "Enchant Value 2",
+      "editable": true,
+      "decimals": 2
+    },
+    "enchant_value3": {
+      "label": "Enchant Value 3",
+      "editable": true,
+      "decimals": 2
+    },
+    "enchant_value4": {
+      "label": "Enchant Value 4",
+      "editable": true,
+      "decimals": 2
+    },
+    "enchant_value5": {
+      "label": "Enchant Value 5",
+      "editable": true,
+      "decimals": 2
+    },
+    "enchant_value6": {
+      "label": "Enchant Value 6",
+      "editable": true,
+      "decimals": 2
+    },
+    "enchant_value7": {
+      "label": "Enchant Value 7",
+      "editable": true,
+      "decimals": 2
+    },
+    "enchant_value8": {
+      "label": "Enchant Value 8",
+      "editable": true,
+      "decimals": 2
+    },
+    "enchant_value9": {
+      "label": "Enchant Value 9",
+      "editable": true,
+      "decimals": 2
+    }
+  }
+}
