@@ -20,14 +20,6 @@ The current public release focuses on a small set of confirmed, safe edits:
 
 The app creates a timestamped backup automatically when you open a save and validates patched saves before writing them back to disk.
 
-## Safety First
-
-- Automatic timestamped backup on file open
-- JSON validation after save
-- Validation that only the intended top-level section changed
-- Validation that only the intended byte range changed inside that section
-- Inspector mode for advanced users, disabled by default
-
 ## Save Discovery
 
 On Windows, the file picker starts in `%LOCALAPPDATA%\Chronicon\save` when that folder exists.
