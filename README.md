@@ -4,101 +4,172 @@
 
 Unofficial fan-made desktop save editor for Chronicon.
 
-Chronicon Save Editor is an open-source utility for inspecting and editing Chronicon save files with a focus on **safe, minimal patching** rather than blindly rewriting whole files. The goal is to make common edits easier for players while reducing the risk of corrupting saves.
+Chronicon Save Editor is an open-source desktop app for inspecting and editing Chronicon save files with a focus on safe, minimal patching instead of blindly rewriting whole files.
 
-## Status
+## What It Does
 
-Early project / concept stage.
+The current public release focuses on a small set of confirmed, safe edits:
 
-Planned focus:
-- safe save backups before any edit
-- read-only inspection mode first
-- support for common edits such as level, currencies, and selected item affix values
-- before/after diff view
-- advanced mode for risky or experimental edits
-
-## Goals
-
-- Make Chronicon save editing accessible to normal players
-- Preserve saves by patching only the bytes that actually need to change
-- Keep the parser and UI separate so the community can improve field mappings over time
-- Build a transparent editor that shows exactly what changed
-
-## Planned Features
-
-### Safe editing
-- Automatic timestamped backup when opening a save
-- Validation before save
-- Rollback from backup
-- Warnings for unknown or risky edits
-
-### Inspector tools
-- Read-only save overview
-- Character summary
-- Item and affix inspection
-- Field-level and hex-level diff viewer
-
-### First editable fields
 - Character level
-- Gold and crystals, where detected
-- Known item affix numeric values
-- Additional progression values as mappings are confirmed
+- Free skill points
+- Free mastery points
+- Equipped item numeric affix editing for mapped equipped items
 
-### Advanced mode
-- Hidden behind an explicit toggle
-- For experimental fields not yet fully mapped
-- Designed for experienced users who accept the risks
+The app creates a timestamped backup automatically when you open a save and validates patched saves before writing them back to disk.
 
-## Design Principles
+## Safety First
 
-- **Back up first**
-- **Patch minimally**
-- **Show the diff**
-- **Warn clearly**
-- **Do not pretend unknown data is safe**
+- Automatic timestamped backup on file open
+- JSON validation after save
+- Validation that only the intended top-level section changed
+- Validation that only the intended byte range changed inside that section
+- Inspector mode for advanced users, disabled by default
 
-## Tech Stack
+## Save Discovery
 
-Planned stack:
-- **Python**
-- **PySide6** for desktop UI
+On Windows, the file picker starts in `%LOCALAPPDATA%\Chronicon\save` when that folder exists.
 
-Project structure should keep:
-- parser logic
-- field mapping definitions
-- validation logic
-- UI
+If the default Chronicon save folder is not found, the app falls back to the normal file picker. The last opened folder is remembered for the next session.
 
-cleanly separated.
+## Portable Windows .exe
 
-## Community Mapping
+If you are using the portable release build:
 
-A long-term goal is to support community-maintained mappings for:
-- save sections
-- character fields
-- item affixes
-- numeric value types
+1. Download `ChroniconSaveEditor.exe`.
+2. Run the executable directly.
+3. Open your `*.char` save file.
+4. The app will create a backup automatically before loading the save.
 
-This should make it easier to expand the editor without rewriting the application each time a new field is identified.
+The portable executable uses the same Editor and Inspector workflow as the source version.
 
-## Installation
+## Run From Source
 
-Not yet available.
+```powershell
+py -3.11 -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -e .[dev]
+python -m chronicon_save_editor
+```
 
-When the first version is ready, installation instructions for Windows will be added here.
+## Build The Portable .exe
 
-## Usage
+Use the included build script:
 
-Not yet available.
+```powershell
+.\scripts\build_windows_portable.ps1
+```
 
-Planned basic workflow:
-1. Open a `.char` save file
-2. Automatic backup is created
-3. Inspect detected fields
-4. Make safe edits
-5. Review before/after diff
-6. Save patched file
-7. Test in game
+That script packages:
+
+- the PySide6 runtime
+- bundled application data such as `field_map.json`
+
+Output:
+
+```text
+dist\ChroniconSaveEditor.exe
+```
+
+If you prefer the direct PyInstaller command:
+
+```powershell
+.venv\Scripts\python.exe -m PyInstaller `
+  --noconfirm `
+  --clean `
+  --name ChroniconSaveEditor `
+  --windowed `
+  --onefile `
+  --collect-all PySide6 `
+  --collect-data chronicon_save_editor `
+  src\chronicon_save_editor\__main__.py
+```
+
+## How To Use
+
+1. Open a `*.char` save file.
+2. Let the app create its automatic backup.
+3. Use the `Editor` tab for normal editing.
+4. Save character changes with `Apply Character Changes`.
+5. Save equipped affix changes with `Save Affix`.
+6. Review the success or failure message after each save.
+
+The main window also keeps a short last-change summary so it is easy to confirm what was updated.
+
+## Inspector Mode
+
+`Inspector` is a secondary, advanced view for users who want low-level visibility into the save structure.
+
+It includes:
+
+- raw section browser
+- raw JSON token view
+- hex view
+- ASCII preview
+- printable-string extraction
+
+Inspector stays disabled until `Advanced Mode` is explicitly enabled in the main window.
+
+## Backups
+
+Every time you open a save, the app creates a timestamped backup in a sibling `backups\` folder before loading the file.
+
+That backup behavior is automatic and intended to make testing edits safer.
+
+## Known Limitations
+
+The current release does not yet support:
+
+- Currency editing
+- Inventory injection or duplication
+- Mastery level editing
+- Gem or socket editing
+- Stash editing
+
+If a field is not clearly mapped and safely patchable, it is intentionally left unsupported.
+
+## Screenshots
+
+Screenshots will be added here as the release presentation is polished further.
+
+Suggested placeholders:
+
+- Main Editor view
+- Equipped item affix editor
+- Inspector mode
+
+## Roadmap
+
+### Near term
+
+- Better release polish and UI refinements
+- Before/after diff views
+- Additional safely confirmed scalar fields
+- Better error messaging and recovery flow
+
+### Later
+
+- Currency editing once global/shared storage is confidently mapped
+- Broader community-maintained field mappings
+- More item editing once mappings are strongly validated
+
+## Tests
+
+```powershell
+.venv\Scripts\python.exe -m pytest
+```
+
+## Project Layout
+
+```text
+src/chronicon_save_editor/
+  data/                 Community-maintained mapping files
+  parser/               Save parsing and exact-byte patch helpers
+  services/             Backup and save-location helpers
+  ui/                   PySide6 desktop UI
+tests/                  Parser and service tests
+scripts/                Build helpers
+```
 
 ## Warning
 
@@ -114,51 +185,8 @@ Use at your own risk.
 - Not affiliated with the Chronicon developer
 - Intended for personal use, experimentation, and save inspection/editing
 
-If the Chronicon developer has any concerns about this project, please open an issue.
-
-## Contributing
-
-Contributions are welcome once the initial parser and UI scaffold are in place.
-
-Likely contribution areas:
-- parser improvements
-- field identification
-- affix mapping
-- testing against known-good saves
-- UI improvements
-- packaging and release workflow
-
-## Roadmap
-
-### Phase 1
-- Project scaffold
-- Save loading
-- Backup creation
-- Read-only inspector
-
-### Phase 2
-- Character level editing
-- Diff viewer
-- Validation checks
-
-### Phase 3
-- Currency editing
-- Known item affix editing
-- Better error handling
-
-### Phase 4
-- Community mapping support
-- Advanced mode
-- Release packaging
-
 ## Support
 
 If this tool saves you time and you want to support development, you can buy me a coffee here:
 
-**Buy Me a Coffee:** [Link](https://buymeacoffee.com/powerclean)
-
-## License
-
-Suggested license: **MIT**
-
-If you prefer community improvements to remain open, you could instead use **GPL-3.0**.
+**Buy Me a Coffee:** [buymeacoffee.com/powerclean](https://buymeacoffee.com/powerclean)
