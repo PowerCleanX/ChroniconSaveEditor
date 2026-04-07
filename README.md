@@ -125,15 +125,12 @@ If a field is not clearly mapped and safely patchable, it is intentionally left 
 
 ## Screenshots
 
-Screenshots will be added here as the release presentation is polished further.
+<img width="1978" height="1343" alt="image" src="https://github.com/user-attachments/assets/d08f87df-9bca-482a-8260-1fdb12085547" />
 
-Suggested placeholders:
+<img width="1976" height="967" alt="image" src="https://github.com/user-attachments/assets/7512bdb5-87f7-46c0-b325-8ddad04333bd" />
 
-- Main Editor view
-- Equipped item affix editor
-- Inspector mode
+<img width="1979" height="403" alt="image" src="https://github.com/user-attachments/assets/e9396d5d-654d-44b5-a52a-e67e1b57c872" />
 
-## Roadmap
 
 ### Near term
 
